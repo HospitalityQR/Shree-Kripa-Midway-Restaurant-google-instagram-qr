@@ -8,11 +8,10 @@ python generate_qr.py
 echo.
 echo [2/3] Staging and Committing Changes...
 git add .
-git commit -m "Update Shree Kripa QR config, standees & landing page"
+git commit -m "update"
 echo.
-echo [3/3] Pushing to GitHub Pages...
-git push origin main
-git push origin main:gh-pages --force
+echo [3/3] Pushing to GitHub Pages (main)...
+git push
 echo.
 echo [DONE] Live changes deployed successfully!
 pause
