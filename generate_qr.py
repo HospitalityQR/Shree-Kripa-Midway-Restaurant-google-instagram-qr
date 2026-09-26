@@ -59,20 +59,16 @@ def create_ambience_luxury_background(width=1200, height=1800):
     - Deep Royal Peacock Teal Velvet & Warm Cove Gold color grading (#0A3C44 -> #052227 -> #031316)
     - Warm Golden Chandelier & Cove radial glow behind the brand crest and Hindi 'श्री कृपा' title
     """
-    # Base gradient: Deep Peacock Teal Velvet & Warm Golden Cove
     y_idx = np.linspace(0, 1, height)[:, None]
     x_idx = np.linspace(0, 1, width)[None, :]
 
-    # Top warm teal-gold cove -> Mid Royal Peacock Teal -> Deep Midnight Teal-Obsidian bottom
     r_base = (14 * (1 - y_idx) + 4 * y_idx)
     g_base = (62 * (1 - y_idx) + 22 * y_idx)
     b_base = (70 * (1 - y_idx) + 26 * y_idx)
 
-    # Warm golden ceiling cove spotlight around top center (x=0.5, y=0.18)
     dist_top = np.sqrt(((x_idx - 0.5) / 0.52) ** 2 + ((y_idx - 0.18) / 0.24) ** 2)
     glow_top = np.clip(1.0 - dist_top, 0, 1) ** 1.8
 
-    # Secondary soft peacock-emerald glow behind QR center (x=0.5, y=0.60)
     dist_mid = np.sqrt(((x_idx - 0.5) / 0.58) ** 2 + ((y_idx - 0.60) / 0.32) ** 2)
     glow_mid = np.clip(1.0 - dist_mid, 0, 1) ** 2.0
 
@@ -87,12 +83,10 @@ def create_ambience_luxury_background(width=1200, height=1800):
     ], axis=2).astype(np.uint8)
     base_img = Image.fromarray(grad_arr, "RGB")
 
-    # Composite actual restaurant ambience photos softly into the background
     amb_path = "ambience_1.jpg" if os.path.exists("ambience_1.jpg") else ("ambience_3.jpg" if os.path.exists("ambience_3.jpg") else None)
     if amb_path:
         try:
             amb = Image.open(amb_path).convert("RGB")
-            # Cover-crop to 1200x1800
             aw, ah = amb.size
             target_ratio = width / height
             src_ratio = aw / ah
@@ -106,21 +100,16 @@ def create_ambience_luxury_background(width=1200, height=1800):
                 amb = amb.crop((0, top, aw, top + new_h))
             amb = amb.resize((width, height), Image.Resampling.LANCZOS)
 
-            # Soft architectural depth blur so foreground text & QR stay 100% crisp
             amb_blur = amb.filter(ImageFilter.GaussianBlur(radius=8))
             amb_blur = ImageEnhance.Contrast(amb_blur).enhance(1.15)
             amb_blur = ImageEnhance.Color(amb_blur).enhance(1.25)
 
-            # Blend ambience photo with the Royal Peacock Teal & Gold gradient
-            # Stronger ambience visibility in the upper/mid architectural arches, deeper vignette near edges
             amb_arr = np.array(amb_blur, dtype=np.float32)
             base_arr = np.array(base_img, dtype=np.float32)
 
-            # Radial edge vignette so borders and footer are deep & clean
             edge_dist = np.sqrt(((x_idx - 0.5) / 0.55) ** 2 + ((y_idx - 0.45) / 0.55) ** 2)
             vignette = np.clip(1.0 - 0.45 * (edge_dist ** 1.6), 0.12, 0.30)[:, :, None]
 
-            # Color-grade the ambience photo slightly towards Peacock Teal & Warm Gold
             graded_amb = np.zeros_like(amb_arr)
             graded_amb[:, :, 0] = amb_arr[:, :, 0] * 0.88
             graded_amb[:, :, 1] = amb_arr[:, :, 1] * 1.02 + 8
@@ -131,11 +120,9 @@ def create_ambience_luxury_background(width=1200, height=1800):
         except Exception as e:
             print("Ambience blend warning:", e)
 
-    # Add subtle Peacock Mandala / Royal Arch watermark geometry & golden cove light beams
     overlay = Image.new("RGBA", (width, height), (0, 0, 0, 0))
     odraw = ImageDraw.Draw(overlay)
 
-    # Subtle golden cove ceiling arch lines at top (matching the stepped ceiling cove lights in the photo)
     cx, cy = width // 2, 210
     for r_arch, alpha_val in [(260, 26), (340, 20), (430, 14), (530, 10)]:
         odraw.ellipse(
@@ -144,7 +131,6 @@ def create_ambience_luxury_background(width=1200, height=1800):
             width=2
         )
 
-    # Subtle Peacock Mandala geometric petals around the top medallion
     for angle_deg in range(0, 360, 15):
         rad = math.radians(angle_deg)
         x1 = cx + int(125 * math.cos(rad))
@@ -159,24 +145,18 @@ def create_ambience_luxury_background(width=1200, height=1800):
 
 def draw_indri_luxury_borders(draw, width=1200, height=1800):
     """
-    Draw the signature luxury 24k Gold double border with ornamental corner accents:
-    - Outer thick gold border (#C5A034)
-    - Inner hairline gold border (#9A7B24)
-    - Corner royal diamond flourishes
+    Draw the signature luxury 24k Gold double border with ornamental corner accents.
     """
     gold_outer = (197, 160, 52)
     gold_inner = (165, 132, 42)
     gold_bright = (238, 216, 140)
 
-    # Outer border (width=4) at 36px inset
     m1 = 36
     draw.rectangle([m1, m1, width - m1, height - m1], outline=gold_outer, width=4)
 
-    # Inner border (width=1) at 52px inset
     m2 = 52
     draw.rectangle([m2, m2, width - m2, height - m2], outline=gold_inner, width=1)
 
-    # Ornamental corner L-brackets & diamonds inside the frame
     c_len = 42
     for cx, cy, dx, dy in [
         (m2 + 10, m2 + 10, 1, 1),
@@ -221,10 +201,10 @@ def draw_google_g_icon(draw, cx, cy, radius=14):
     """Draw a clean Google 'G' multi-color icon inside a white circle."""
     draw.ellipse([cx - radius - 3, cy - radius - 3, cx + radius + 3, cy + radius + 3], fill=(255, 255, 255))
     bbox = [cx - radius, cy - radius, cx + radius, cy + radius]
-    draw.pieslice(bbox, 220, 325, fill=(234, 67, 53))   # Red top
-    draw.pieslice(bbox, 135, 220, fill=(251, 188, 5))   # Yellow left
-    draw.pieslice(bbox, 45, 135, fill=(52, 168, 83))    # Green bottom
-    draw.pieslice(bbox, 345, 45, fill=(66, 133, 244))   # Blue right
+    draw.pieslice(bbox, 220, 325, fill=(234, 67, 53))
+    draw.pieslice(bbox, 135, 220, fill=(251, 188, 5))
+    draw.pieslice(bbox, 45, 135, fill=(52, 168, 83))
+    draw.pieslice(bbox, 345, 45, fill=(66, 133, 244))
     inner_r = int(radius * 0.56)
     draw.ellipse([cx - inner_r, cy - inner_r, cx + inner_r, cy + inner_r], fill=(255, 255, 255))
     draw.rectangle([cx, cy - int(radius * 0.22), cx + radius, cy + int(radius * 0.24)], fill=(66, 133, 244))
@@ -262,10 +242,9 @@ def draw_brand_header(canvas, draw, w=1200):
     1. 24k Gold Rim Circular SK Logo Medallion
     2. Official Hindi 'श्री कृपा' Calligraphy with Golden Bansuri Flute & Mor Pankh (Peacock Feather)
     3. 'MIDWAY RESTAURANT' in 24k Brushed Gold
-    4. 'PURE VEG • RAU, NH 3, INDORE' in crisp white
+    4. '100% PURE VEG • RAU, NH 3, INDORE' in crisp white
     5. Ornamental 24k Gold Divider with Central Diamond
     """
-    # 1. Circular SK Logo with 24k Gold Rim
     logo_path = "logo_with_gold_rim.png" if os.path.exists("logo_with_gold_rim.png") else "logo.png"
     if os.path.exists(logo_path):
         logo = Image.open(logo_path).convert("RGBA")
@@ -273,7 +252,6 @@ def draw_brand_header(canvas, draw, w=1200):
         logo = logo.resize((logo_size, logo_size), Image.Resampling.LANCZOS)
         canvas.paste(logo, (int((w - logo_size) / 2), 54), mask=logo)
 
-    # 2. Official Hindi 'श्री कृपा' Calligraphy with Golden Flute & Peacock Feather
     hindi_path = "shree_kripa_hindi_title.png"
     if os.path.exists(hindi_path):
         hindi_img = Image.open(hindi_path).convert("RGBA")
@@ -284,26 +262,23 @@ def draw_brand_header(canvas, draw, w=1200):
         hy = 208
         canvas.paste(hindi_img, (hx, hy), mask=hindi_img)
 
-    # 3. 'MIDWAY RESTAURANT' in 24k Champagne Gold
     font_midway = get_font(36, bold=True)
     midway_text = "M I D W A Y   R E S T A U R A N T"
     bbox = draw.textbbox((0, 0), midway_text, font=font_midway)
     draw.text(((w - (bbox[2] - bbox[0])) / 2, 448), midway_text, fill=(242, 216, 135), font=font_midway)
 
-    # 4. Subtitle: PURE VEG • RAU, NH 3, INDORE
     font_sub = get_font(23, bold=True)
     sub_text = "100% PURE VEG  •  RAU, NH 3, INDORE"
     bbox = draw.textbbox((0, 0), sub_text, font=font_sub)
     draw.text(((w - (bbox[2] - bbox[0])) / 2, 498), sub_text, fill=(255, 255, 255), font=font_sub)
 
-    # 5. Gold Divider Line + Central Diamond
     div_y = 544
     draw.line([200, div_y, w - 200, div_y], fill=(197, 160, 52), width=2)
     draw.polygon([(w // 2, div_y - 7), (w // 2 + 7, div_y), (w // 2, div_y + 7), (w // 2 - 7, div_y)], fill=(242, 216, 135))
 
 def draw_footer(canvas, draw, w=1200):
     """
-    Draw the La Indri-style Bottom Address & Phone Box + Gold Sparkle Thank-You Footer
+    Draw the Bottom Address & Phone Box + Gold Sparkle Thank-You Footer
     over a rich dark Peacock-Teal glass panel.
     """
     font_addr = get_font(22, bold=False)
@@ -344,13 +319,15 @@ def draw_footer(canvas, draw, w=1200):
     draw_sparkle(draw, tx - 32, ty + 16, radius=11, color=(238, 216, 140))
     draw_sparkle(draw, tx + tw + 32, ty + 16, radius=11, color=(238, 216, 140))
 
-def build_hub_standee(config, output_filenames=["table_standee_printable.png", "standee_front_printable.png"]):
+def build_hub_standee(config, bg_img, output_filenames=["table_standee_printable.png", "standee_front_printable.png"]):
     """
-    Generate the 300 DPI Primary Table Standee matching La Indri's exact layout,
-    customized with Shree Kripa's Hindi 'श्री कृपा' calligraphy and Peacock Teal & Warm Gold Ambience.
+    Generate the 300 DPI Primary Table Standee with:
+    - Hindi 'श्री कृपा' calligraphy
+    - 'Rate Us on Google' and 'Follow Us on Instagram' pill badges
+    - Peacock Teal & Warm Gold Ambience background
     """
     w, h = 1200, 1800
-    canvas = create_ambience_luxury_background(w, h)
+    canvas = bg_img.copy()
     draw = ImageDraw.Draw(canvas)
     draw_indri_luxury_borders(draw, w, h)
     draw_brand_header(canvas, draw, w)
@@ -362,27 +339,35 @@ def build_hub_standee(config, output_filenames=["table_standee_printable.png", "
     bbox = draw.textbbox((0, 0), cta_text, font=font_cta)
     draw.text(((w - (bbox[2] - bbox[0])) / 2, 570), cta_text, fill=(255, 255, 255), font=font_cta)
 
+    # Two Pill Badges: [G Rate Us on Google] and [Follow Us on Instagram]
+    label_g = "Rate Us on Google"
+    label_i = "Follow Us on Instagram"
+    bbox_g = draw.textbbox((0, 0), label_g, font=font_pill)
+    bbox_i = draw.textbbox((0, 0), label_i, font=font_pill)
+
     pill_y = 642
-    pill_h = 52
-    pill_w_g = 255
-    pill_w_i = 215
+    pill_h = 54
+    pill_w_g = (bbox_g[2] - bbox_g[0]) + 84
+    pill_w_i = (bbox_i[2] - bbox_i[0]) + 84
     gap = 24
     total_pills_w = pill_w_g + gap + pill_w_i
     start_x = int((w - total_pills_w) / 2)
 
+    # Left Pill: Rate Us on Google
     gx1, gy1 = start_x, pill_y
     gx2, gy2 = gx1 + pill_w_g, pill_y + pill_h
-    draw.rounded_rectangle([gx1, gy1, gx2, gy2], radius=26, fill=(6, 38, 45), outline=(212, 175, 55), width=2)
-    draw_google_g_icon(draw, gx1 + 32, gy1 + pill_h // 2, radius=13)
-    draw.text((gx1 + 58, gy1 + 13), "Google Review", fill=(255, 255, 255), font=font_pill)
+    draw.rounded_rectangle([gx1, gy1, gx2, gy2], radius=27, fill=(6, 38, 45), outline=(212, 175, 55), width=2)
+    draw_google_g_icon(draw, gx1 + 34, gy1 + pill_h // 2, radius=13)
+    draw.text((gx1 + 60, gy1 + 14), label_g, fill=(255, 255, 255), font=font_pill)
 
+    # Right Pill: Follow Us on Instagram
     ix1, iy1 = gx2 + gap, pill_y
     ix2, iy2 = ix1 + pill_w_i, pill_y + pill_h
-    draw.rounded_rectangle([ix1, iy1, ix2, iy2], radius=26, fill=(6, 38, 45), outline=(212, 175, 55), width=2)
+    draw.rounded_rectangle([ix1, iy1, ix2, iy2], radius=27, fill=(6, 38, 45), outline=(212, 175, 55), width=2)
     draw_instagram_icon(draw, ix1 + 34, iy1 + pill_h // 2, size=24)
-    draw.text((ix1 + 58, iy1 + 13), "Instagram", fill=(255, 255, 255), font=font_pill)
+    draw.text((ix1 + 60, iy1 + 14), label_i, fill=(255, 255, 255), font=font_pill)
 
-    qr_url = config.get("landingPageUrl", "https://hospitalityqr.github.io/Shree-Kripa-Midway-Restaurant-google-instagram-qr/")
+    qr_url = config.get("landingPageUrl", "https://hospitalityqr.github.io/Shree-Kripa-Midway-Restaurant-google-instagram-qr/?v=2")
     qr_img = generate_styled_qr(qr_url, box_size=18, border=2, fill_color=(12, 24, 28))
 
     card_size = 720
@@ -419,20 +404,21 @@ def build_hub_standee(config, output_filenames=["table_standee_printable.png", "
         canvas.save(fn, quality=95, dpi=(300, 300))
         print(f"[OK] Generated {fn} (300 DPI)")
 
-def build_dual_direct_standee(config, output_filename="standee_dual_direct_static.png"):
+def build_dual_direct_standee(config, bg_img, output_filename="standee_dual_direct_static.png"):
     """
-    Generate 300 DPI Dual Direct Static Standee (Left QR -> Google Review, Right QR -> Instagram)
+    Generate 300 DPI Dual Direct Static Standee (Left QR -> Rate Us on Google, Right QR -> Follow Us on Instagram)
     with Hindi 'श्री कृपा' calligraphy and Peacock Teal & Warm Gold Ambience.
     """
     w, h = 1200, 1800
-    canvas = create_ambience_luxury_background(w, h)
+    canvas = bg_img.copy()
     draw = ImageDraw.Draw(canvas)
     draw_indri_luxury_borders(draw, w, h)
     draw_brand_header(canvas, draw, w)
 
     font_cta = get_font(42, bold=True)
     font_sub_cta = get_font(23, bold=True)
-    font_card_head = get_font(26, bold=True)
+    font_card_head_g = get_font(23, bold=True)
+    font_card_head_i = get_font(21, bold=True)
     font_card_sub = get_font(20, bold=True)
     font_feature_title = get_font(25, bold=True)
     font_feature_item = get_font(22, bold=False)
@@ -456,21 +442,20 @@ def build_dual_direct_standee(config, output_filename="standee_dual_direct_stati
     right_x = w - 100 - card_w
     cards_y = 678
 
-    # Left Card: Google Review
+    # Left Card: Rate Us on Google
     draw.rounded_rectangle([left_x, cards_y, left_x + card_w, cards_y + card_h], radius=24, fill=(255, 255, 255), outline=(197, 160, 52), width=4)
-    draw.rounded_rectangle([left_x + 28, cards_y + 20, left_x + card_w - 28, cards_y + 74], radius=27, fill=(6, 42, 49), outline=(197, 160, 52), width=2)
-    draw_google_g_icon(draw, left_x + 68, cards_y + 47, radius=14)
-    draw.text((left_x + 100, cards_y + 32), "GOOGLE REVIEW", fill=(255, 255, 255), font=font_card_head)
+    draw.rounded_rectangle([left_x + 22, cards_y + 20, left_x + card_w - 22, cards_y + 74], radius=27, fill=(6, 42, 49), outline=(197, 160, 52), width=2)
+    draw_google_g_icon(draw, left_x + 56, cards_y + 47, radius=13)
+    draw.text((left_x + 84, cards_y + 34), "Rate Us on Google", fill=(255, 255, 255), font=font_card_head_g)
     canvas.paste(qr_g, (left_x + (card_w - 410) // 2, cards_y + 92))
-    # Draw 5 vector gold stars + RATE US ON GOOGLE
     draw_5_stars_row(draw, left_x + 76, cards_y + 533, star_radius=8, spacing=20, color=(218, 165, 32))
     draw.text((left_x + 182, cards_y + 522), "RATE US ON GOOGLE", fill=(8, 52, 60), font=font_card_sub)
 
-    # Right Card: Instagram
+    # Right Card: Follow Us on Instagram
     draw.rounded_rectangle([right_x, cards_y, right_x + card_w, cards_y + card_h], radius=24, fill=(255, 255, 255), outline=(197, 160, 52), width=4)
-    draw.rounded_rectangle([right_x + 28, cards_y + 20, right_x + card_w - 28, cards_y + 74], radius=27, fill=(6, 42, 49), outline=(197, 160, 52), width=2)
-    draw_instagram_icon(draw, right_x + 76, cards_y + 47, size=26)
-    draw.text((right_x + 112, cards_y + 32), "INSTAGRAM", fill=(255, 255, 255), font=font_card_head)
+    draw.rounded_rectangle([right_x + 22, cards_y + 20, right_x + card_w - 22, cards_y + 74], radius=27, fill=(6, 42, 49), outline=(197, 160, 52), width=2)
+    draw_instagram_icon(draw, right_x + 54, cards_y + 47, size=24)
+    draw.text((right_x + 80, cards_y + 35), "Follow Us on Instagram", fill=(255, 255, 255), font=font_card_head_i)
     canvas.paste(qr_i, (right_x + (card_w - 410) // 2, cards_y + 92))
     i_foot = "FOLLOW @SHREE_KRIPA_RESTAURANT"
     bbox = draw.textbbox((0, 0), i_foot, font=font_card_sub)
@@ -505,13 +490,13 @@ def build_dual_direct_standee(config, output_filename="standee_dual_direct_stati
     canvas.save(output_filename, quality=95, dpi=(300, 300))
     print(f"[OK] Generated {output_filename} (300 DPI)")
 
-def build_single_direct_standee(config, url, mode="google", output_filename="standee_google_direct.png"):
+def build_single_direct_standee(config, bg_img, url, mode="google", output_filename="standee_google_direct.png"):
     """
-    Generate 300 DPI Single Direct Standee (Google Review Direct OR Instagram Direct)
+    Generate 300 DPI Single Direct Standee (Rate Us on Google Direct OR Follow Us on Instagram Direct)
     with Hindi 'श्री कृपा' calligraphy and Peacock Teal & Warm Gold Ambience.
     """
     w, h = 1200, 1800
-    canvas = create_ambience_luxury_background(w, h)
+    canvas = bg_img.copy()
     draw = ImageDraw.Draw(canvas)
     draw_indri_luxury_borders(draw, w, h)
     draw_brand_header(canvas, draw, w)
@@ -521,15 +506,16 @@ def build_single_direct_standee(config, url, mode="google", output_filename="sta
 
     if mode == "google":
         cta_text = "RATE US ON GOOGLE"
-        pill_label = "Google Review  •  5-Star Rating"
+        pill_label = "Rate Us on Google  •  5-Star Rating"
     else:
         cta_text = "FOLLOW US ON INSTAGRAM"
-        pill_label = "@shree_kripa_restaurant"
+        pill_label = "Follow Us on Instagram  •  @shree_kripa_restaurant"
 
     bbox = draw.textbbox((0, 0), cta_text, font=font_cta)
     draw.text(((w - (bbox[2] - bbox[0])) / 2, 570), cta_text, fill=(255, 255, 255), font=font_cta)
 
-    pill_w = 450
+    bbox_p = draw.textbbox((0, 0), pill_label, font=font_pill)
+    pill_w = (bbox_p[2] - bbox_p[0]) + 96
     pill_h = 54
     px1 = int((w - pill_w) / 2)
     py1 = 642
@@ -560,11 +546,126 @@ def build_single_direct_standee(config, url, mode="google", output_filename="sta
     canvas.save(output_filename, quality=95, dpi=(300, 300))
     print(f"[OK] Generated {output_filename} (300 DPI)")
 
+def build_mobile_landing_preview(bg_img, output_filename="mobile_landing_preview.png"):
+    """
+    Generate a visual preview of the Mobile QR Landing Page (index.html) showing:
+    - Exact same Peacock Teal & Warm Golden Cove Ambience background
+    - Circular 24k Gold Rim SK Logo + Official Hindi 'श्री कृपा' Calligraphy with Bansuri & Mor Pankh
+    - 'Rate Us on Google' and 'Follow Us on Instagram' pills & interactive cards
+    - Ambience gallery strip + Address & Call button
+    """
+    w, h = 1200, 1800
+    canvas = bg_img.copy()
+    draw = ImageDraw.Draw(canvas)
+    draw_indri_luxury_borders(draw, w, h)
+    draw_brand_header(canvas, draw, w)
+
+    font_cta = get_font(38, bold=True)
+    font_pill = get_font(21, bold=True)
+    font_card_title = get_font(30, bold=True)
+    font_card_desc = get_font(22, bold=False)
+    font_card_tag = get_font(21, bold=True)
+    font_sec = get_font(22, bold=True)
+
+    cta_text = "SCAN TO CONNECT  •  MOBILE LANDING PAGE"
+    bbox = draw.textbbox((0, 0), cta_text, font=font_cta)
+    draw.text(((w - (bbox[2] - bbox[0])) / 2, 566), cta_text, fill=(255, 255, 255), font=font_cta)
+
+    # Pills: Rate Us on Google & Follow Us on Instagram
+    label_g = "Rate Us on Google"
+    label_i = "Follow Us on Instagram"
+    bbox_g = draw.textbbox((0, 0), label_g, font=font_pill)
+    bbox_i = draw.textbbox((0, 0), label_i, font=font_pill)
+    pill_y = 628
+    pill_h = 50
+    pill_w_g = (bbox_g[2] - bbox_g[0]) + 80
+    pill_w_i = (bbox_i[2] - bbox_i[0]) + 80
+    gap = 22
+    start_x = int((w - (pill_w_g + gap + pill_w_i)) / 2)
+
+    gx1, gy1 = start_x, pill_y
+    draw.rounded_rectangle([gx1, gy1, gx1 + pill_w_g, gy1 + pill_h], radius=25, fill=(6, 38, 45), outline=(212, 175, 55), width=2)
+    draw_google_g_icon(draw, gx1 + 32, gy1 + pill_h // 2, radius=12)
+    draw.text((gx1 + 56, gy1 + 13), label_g, fill=(255, 255, 255), font=font_pill)
+
+    ix1 = gx1 + pill_w_g + gap
+    draw.rounded_rectangle([ix1, gy1, ix1 + pill_w_i, gy1 + pill_h], radius=25, fill=(6, 38, 45), outline=(212, 175, 55), width=2)
+    draw_instagram_icon(draw, ix1 + 32, gy1 + pill_h // 2, size=22)
+    draw.text((ix1 + 56, gy1 + 13), label_i, fill=(255, 255, 255), font=font_pill)
+
+    # Action Card 1: Rate Us on Google
+    glass = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    gdraw = ImageDraw.Draw(glass)
+    c1_y1, c1_y2 = 708, 888
+    c2_y1, c2_y2 = 914, 1094
+    gdraw.rounded_rectangle([115, c1_y1, w - 115, c1_y2], radius=24, fill=(8, 46, 54, 230), outline=(242, 216, 135, 255), width=3)
+    gdraw.rounded_rectangle([115, c2_y1, w - 115, c2_y2], radius=24, fill=(5, 30, 36, 225), outline=(197, 160, 52, 230), width=2)
+    canvas.paste(Image.alpha_composite(canvas.convert("RGBA"), glass).convert("RGB"))
+    draw = ImageDraw.Draw(canvas)
+
+    # Google Card Content
+    draw.rounded_rectangle([150, c1_y1 + 35, 260, c1_y1 + 145], radius=24, fill=(255, 255, 255), outline=(212, 175, 55), width=2)
+    draw_google_g_icon(draw, 205, c1_y1 + 90, radius=32)
+    draw.text((295, c1_y1 + 32), "Rate Us on Google", fill=(255, 255, 255), font=font_card_title)
+    draw.text((295, c1_y1 + 76), "Share your dining experience with us", fill=(185, 210, 212), font=font_card_desc)
+    draw_5_stars_row(draw, 305, c1_y1 + 128, star_radius=10, spacing=26, color=(251, 191, 36))
+    draw.text((440, c1_y1 + 116), "Tap to Review", fill=(242, 216, 135), font=font_card_tag)
+    draw.ellipse([w - 215, c1_y1 + 58, w - 151, c1_y1 + 122], fill=(212, 175, 55), outline=(242, 216, 135), width=2)
+    draw.line([w - 196, c1_y1 + 90, w - 170, c1_y1 + 90], fill=(4, 24, 29), width=3)
+
+    # Instagram Card Content
+    draw.rounded_rectangle([150, c2_y1 + 35, 260, c2_y1 + 145], radius=24, fill=(214, 41, 118), outline=(242, 216, 135), width=2)
+    draw_instagram_icon(draw, 205, c2_y1 + 90, size=62)
+    draw.text((295, c2_y1 + 32), "Follow Us on Instagram", fill=(255, 255, 255), font=font_card_title)
+    draw.text((295, c2_y1 + 76), "Explore delicacies, reels & royal vibes", fill=(185, 210, 212), font=font_card_desc)
+    draw.text((295, c2_y1 + 116), "@shree_kripa_restaurant", fill=(242, 216, 135), font=font_card_tag)
+    draw.ellipse([w - 215, c2_y1 + 58, w - 151, c2_y1 + 122], fill=(8, 48, 56), outline=(212, 175, 55), width=2)
+    draw.line([w - 196, c2_y1 + 90, w - 170, c2_y1 + 90], fill=(242, 216, 135), width=3)
+
+    # Ambience Showcase Strip
+    sec_label = "OUR ROYAL DINING AMBIENCE"
+    bbox = draw.textbbox((0, 0), sec_label, font=font_sec)
+    sw = bbox[2] - bbox[0]
+    sx = (w - sw) / 2
+    draw.text((sx, 1132), sec_label, fill=(242, 216, 135), font=font_sec)
+    draw_sparkle(draw, sx - 24, 1144, radius=9, color=(242, 216, 135))
+    draw_sparkle(draw, sx + sw + 24, 1144, radius=9, color=(242, 216, 135))
+
+    thumb_w, thumb_h = 302, 295
+    thumb_gap = 32
+    t_start_x = int((w - (thumb_w * 3 + thumb_gap * 2)) / 2)
+    t_y = 1178
+    for idx, fn in enumerate(["ambience_1.jpg", "ambience_2.jpg", "ambience_3.jpg"]):
+        tx = t_start_x + idx * (thumb_w + thumb_gap)
+        if os.path.exists(fn):
+            im = Image.open(fn).convert("RGB")
+            iw, ih = im.size
+            s_r = iw / ih
+            t_r = thumb_w / thumb_h
+            if s_r > t_r:
+                nw = int(ih * t_r)
+                im = im.crop(((iw - nw) // 2, 0, (iw - nw) // 2 + nw, ih))
+            else:
+                nh = int(iw / t_r)
+                im = im.crop((0, (ih - nh) // 2, iw, (ih - nh) // 2 + nh))
+            im = im.resize((thumb_w, thumb_h), Image.Resampling.LANCZOS)
+            canvas.paste(im, (tx, t_y))
+            draw.rounded_rectangle([tx, t_y, tx + thumb_w, t_y + thumb_h], radius=16, outline=(212, 175, 55), width=3)
+
+    draw_footer(canvas, draw, w)
+    canvas.save(output_filename, quality=95)
+    print(f"[OK] Generated {output_filename}")
+
 def main():
     config = load_config("config.js")
-    landing_url = config.get("landingPageUrl", "https://hospitalityqr.github.io/Shree-Kripa-Midway-Restaurant-google-instagram-qr/")
+    landing_url = config.get("landingPageUrl", "https://hospitalityqr.github.io/Shree-Kripa-Midway-Restaurant-google-instagram-qr/?v=2")
     google_url = config.get("googleReviewUrl", "https://share.google/MwO49jjEmQJTSvkte")
     insta_url = config.get("instagramUrl", "https://www.instagram.com/shree_kripa_restaurant?stkn=YjdsMzlvMTNlc3dz")
+
+    print("Generating shared Ambience Luxury Background...")
+    bg_img = create_ambience_luxury_background(1200, 1800)
+    bg_img.save("bg_ambience_luxury.jpg", quality=92)
+    print("[OK] Saved bg_ambience_luxury.jpg")
 
     print("Generating standalone high-res QR codes...")
     qr_hub = generate_styled_qr(landing_url, box_size=18, border=2, fill_color=(12, 24, 28))
@@ -578,10 +679,11 @@ def main():
     qr_insta.save("qr_instagram_direct.png")
     print("[OK] Generated qr_code.png, qr_landing_page.png, qr_google_direct.png, qr_instagram_direct.png")
 
-    build_hub_standee(config, ["table_standee_printable.png", "standee_front_printable.png"])
-    build_dual_direct_standee(config, "standee_dual_direct_static.png")
-    build_single_direct_standee(config, google_url, mode="google", output_filename="standee_google_direct.png")
-    build_single_direct_standee(config, insta_url, mode="instagram", output_filename="standee_instagram_direct.png")
+    build_hub_standee(config, bg_img, ["table_standee_printable.png", "standee_front_printable.png"])
+    build_dual_direct_standee(config, bg_img, "standee_dual_direct_static.png")
+    build_single_direct_standee(config, bg_img, google_url, mode="google", output_filename="standee_google_direct.png")
+    build_single_direct_standee(config, bg_img, insta_url, mode="instagram", output_filename="standee_instagram_direct.png")
+    build_mobile_landing_preview(bg_img, "mobile_landing_preview.png")
 
 if __name__ == "__main__":
     main()

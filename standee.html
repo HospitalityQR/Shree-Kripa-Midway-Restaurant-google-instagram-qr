@@ -100,10 +100,7 @@
             width: 480px;
             height: 720px;
             background-color: var(--teal-deep);
-            background-image:
-                radial-gradient(circle at 50% 18%, rgba(242, 216, 135, 0.24) 0%, transparent 45%),
-                linear-gradient(180deg, rgba(10, 58, 66, 0.78) 0%, rgba(5, 32, 38, 0.85) 58%, rgba(3, 18, 22, 0.94) 100%),
-                url('ambience_1.jpg');
+            background-image: url('bg_ambience_luxury.jpg?v=2');
             background-size: cover;
             background-position: center center;
             position: relative;
@@ -283,11 +280,11 @@
             background: #062a31;
             border: 1px solid var(--gold-primary);
             color: #ffffff;
-            font-size: 9.5px;
+            font-size: 9px;
             font-weight: 800;
-            padding: 4px 10px;
+            padding: 4px 8px;
             border-radius: 14px;
-            width: 92%;
+            width: 94%;
         }
 
         .dual-qr-box img {
@@ -369,8 +366,8 @@
         <div class="toolbar-controls">
             <button class="mode-btn active" onclick="setStandeeMode('hub', this)">1. Smart Hub Standee</button>
             <button class="mode-btn" onclick="setStandeeMode('dual', this)">2. Dual Direct QR</button>
-            <button class="mode-btn" onclick="setStandeeMode('google', this)">3. Google Review Direct</button>
-            <button class="mode-btn" onclick="setStandeeMode('insta', this)">4. Instagram Direct</button>
+            <button class="mode-btn" onclick="setStandeeMode('google', this)">3. Rate Us on Google Direct</button>
+            <button class="mode-btn" onclick="setStandeeMode('insta', this)">4. Follow Us on Instagram Direct</button>
             <button class="print-btn" onclick="window.print()">🖨️ Print / Save PDF</button>
         </div>
     </div>
@@ -381,8 +378,8 @@
 
         <!-- Header -->
         <div class="standee-header">
-            <img src="logo_with_gold_rim.png" alt="श्री कृपा Logo" class="standee-logo">
-            <img src="shree_kripa_hindi_title.png" alt="श्री कृपा" class="standee-hindi-title">
+            <img src="logo_with_gold_rim.png?v=2" alt="श्री कृपा Logo" class="standee-logo">
+            <img src="shree_kripa_hindi_title.png?v=2" alt="श्री कृपा" class="standee-hindi-title">
             <div class="standee-subname">MIDWAY RESTAURANT</div>
             <div class="standee-location">100% PURE VEG • RAU, NH 3, INDORE</div>
             <div class="standee-divider"><div class="standee-diamond"></div></div>
@@ -400,32 +397,32 @@
                         <path fill="#FBBC05" d="M5.3 14.8c-.2-.8-.4-1.6-.4-2.5s.2-1.7.4-2.5L1.6 7C.6 9 0 11.2 0 13.5s.6 4.5 1.6 6.5l3.7-2.9z"/>
                         <path fill="#34A853" d="M12 24c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3.1 0-5.8-2.1-6.7-5l-3.7 2.8C3.5 20.9 7.4 24 12 24z"/>
                     </svg>
-                    <span>Google Review</span>
+                    <span>Rate Us on Google</span>
                 </div>
                 <div class="standee-pill">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2">
                         <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                         <circle cx="12" cy="12" r="4"></circle>
                     </svg>
-                    <span>Instagram</span>
+                    <span>Follow Us on Instagram</span>
                 </div>
             </div>
 
             <!-- Single QR Container -->
             <div class="qr-card-single" id="singleQrWrap">
-                <img src="qr_code.png" alt="QR Code" id="singleQrImg">
+                <img src="qr_code.png?v=2" alt="QR Code" id="singleQrImg">
             </div>
 
             <!-- Dual QR Container -->
             <div class="dual-qr-grid" id="dualQrWrap">
                 <div class="dual-qr-box">
-                    <div class="dual-qr-header">GOOGLE REVIEW</div>
-                    <img src="qr_google_direct.png" alt="Google Review QR">
+                    <div class="dual-qr-header">Rate Us on Google</div>
+                    <img src="qr_google_direct.png?v=2" alt="Google Review QR">
                     <div class="dual-qr-foot">★★★★★ RATE US ON GOOGLE</div>
                 </div>
                 <div class="dual-qr-box">
-                    <div class="dual-qr-header">INSTAGRAM</div>
-                    <img src="qr_instagram_direct.png" alt="Instagram QR">
+                    <div class="dual-qr-header">Follow Us on Instagram</div>
+                    <img src="qr_instagram_direct.png?v=2" alt="Instagram QR">
                     <div class="dual-qr-foot">@SHREE_KRIPA_RESTAURANT</div>
                 </div>
             </div>
@@ -459,7 +456,7 @@
                 heading.textContent = 'SCAN TO CONNECT';
                 singleWrap.style.display = 'flex';
                 dualWrap.style.display = 'none';
-                singleImg.src = 'qr_code.png';
+                singleImg.src = 'qr_code.png?v=2';
             } else if (mode === 'dual') {
                 heading.textContent = 'SCAN TO CONNECT DIRECTLY';
                 singleWrap.style.display = 'none';
@@ -468,12 +465,12 @@
                 heading.textContent = 'RATE US ON GOOGLE';
                 singleWrap.style.display = 'flex';
                 dualWrap.style.display = 'none';
-                singleImg.src = 'qr_google_direct.png';
+                singleImg.src = 'qr_google_direct.png?v=2';
             } else if (mode === 'insta') {
                 heading.textContent = 'FOLLOW US ON INSTAGRAM';
                 singleWrap.style.display = 'flex';
                 dualWrap.style.display = 'none';
-                singleImg.src = 'qr_instagram_direct.png';
+                singleImg.src = 'qr_instagram_direct.png?v=2';
             }
         }
     </script>
