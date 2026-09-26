@@ -24,7 +24,7 @@ window.RESTAURANT_CONFIG = {
     ],
 
     // 3. Action Destination Links
-    googleReviewUrl: "https://www.google.com/gasearch?q=shree%20kripa%20midway%20restaurant%20reviews&source=sh/x/gs/m2/5#sv=CAESzQEKuQEStgEKd0FKaVQ0dEs0ZklfZ3JjWU9kWUxXRTZqdkZpbHpyWm5FV01kN3g3V1JLd1JBYTRnQVNOeU14VFhCWUQ4ZnJtdXdaYmJGRVdIVUNhbHI0Vmt2QnJXbkJmcjVJci0xQVhpX2I1NVVPVXd1OWpUQ2d6LXpRS0UzS0E0EhcwWlczYXVMQUI3LVlodmNQMl9tNWtBTRoiQURzcjlmUXpOamlFWjFnN2hqRUxlVUV2R3RGbEl4bkJBZxIEODA1MRoBMyoAMAA4AUAAGAAg1MbujwpKAhAB",
+    googleReviewUrl: "https://www.instagram.com/shree_kripa_restaurant?stkn=YjdsMzlvMTNlc3dz",
     instagramUrl: "https://www.instagram.com/shree_kripa_restaurant?stkn=YjdsMzlvMTNlc3dz",
     instagramHandle: "@shree_kripa_restaurant",
 
