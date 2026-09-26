@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title id="pageTitle">Shree Kripa Midway Restaurant | Rau, Indore</title>
+    
+    <!-- Meta Tags for SEO & Social Sharing -->
+    <meta name="description" id="metaDesc" content="Connect with Shree Kripa Midway Restaurant, Near Maharana Pratap Bridge, Pigdamber, Rau, NH 3, Indore. Rate us 5-stars on Google and follow us on Instagram.">
+    <meta name="theme-color" content="#1a0205">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-top: #3B0712;
+            --bg-bottom: #1A090C;
+            --gold-primary: #c5a034;
+            --gold-light: #eed88c;
+            --gold-dark: #8c6614;
+            --gold-gradient: linear-gradient(135deg, #eed88c 0%, #c5a034 50%, #8c6614 100%);
+            --card-bg: rgba(255, 255, 255, 0.075);
+            --card-border: rgba(197, 160, 52, 0.28);
+            --card-border-hover: rgba(197, 160, 52, 0.6);
+            --text-primary: #ffffff;
+            --text-secondary: #f0d5da;
+            --text-muted: #b89fa4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(180deg, #3B0712 0%, #250a10 50%, #1A090C 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 26px 18px 40px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Very subtle ambient radial glow behind logo */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 500px;
+            height: 420px;
+            background: radial-gradient(circle at 50% 32%, rgba(197, 160, 52, 0.11) 0%, rgba(59, 7, 18, 0.08) 55%, transparent 75%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 500px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(18, 6, 7, 0.4) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 440px;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Brand Section */
+        .brand-section {
+            text-align: center;
+            margin-bottom: 22px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo-wrapper {
+            position: relative;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-glow {
+            position: absolute;
+            width: 132px;
+            height: 132px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.48) 0%, rgba(178, 30, 39, 0.2) 50%, transparent 75%);
+            filter: blur(14px);
+            z-index: 0;
+            animation: pulseGlow 3.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(0.92); opacity: 0.55; }
+            100% { transform: scale(1.08); opacity: 0.95; }
+        }
+
+        .official-logo {
+            width: 112px;
+            height: 112px;
+            border-radius: 50%;
+            object-fit: cover;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.65), 0 0 22px rgba(212, 175, 55, 0.42);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .official-logo:hover {
+            transform: scale(1.06) rotate(1deg);
+        }
+
+        .brand-title {
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: 0.6px;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 3px;
+            text-shadow: 0 2px 12px rgba(212, 175, 55, 0.25);
+        }
+
+        .brand-sub {
+            font-size: 13px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            opacity: 0.95;
+        }
+
+        .tagline-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 5px 15px;
+            background: rgba(212, 175, 55, 0.12);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--gold-light);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+        }
+
+        .tagline-badge svg {
+            width: 13px;
+            height: 13px;
+            fill: var(--gold-primary);
+        }
+
+        /* Action Cards */
+        .links-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .action-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px;
+            border-radius: 18px;
+            text-decoration: none;
+            color: #ffffff;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+        }
+
+        .action-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.09), transparent);
+            transition: left 0.75s ease;
+        }
+
+        .action-card:hover::before {
+            left: 140%;
+        }
+
+        .action-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--card-border-hover);
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5), 0 0 22px rgba(212, 175, 55, 0.3);
+            background: rgba(255, 255, 255, 0.085);
+        }
+
+        .action-card:active {
+            transform: scale(0.98);
+        }
+
+        .card-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+
+        .icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 5px 16px rgba(0, 0, 0, 0.35);
+        }
+
+        .icon-google-box {
+            background: #ffffff;
+            border: 1.5px solid rgba(212, 175, 55, 0.45);
+        }
+
+        .icon-instagram-box {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            border: 1.5px solid rgba(255, 255, 255, 0.35);
+        }
+
+        .icon-svg {
+            width: 26px;
+            height: 26px;
+        }
+
+        .card-info {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 2px;
+        }
+
+        .card-desc {
+            font-size: 11.5px;
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+            line-height: 1.35;
+            white-space: pre-line;
+        }
+
+        .stars-row {
+            display: flex;
+            gap: 3px;
+        }
+
+        .star {
+            color: #ffc107;
+            font-size: 14px;
+            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+            animation: starPulse 2.5s infinite ease-in-out;
+        }
+
+        .star:nth-child(2) { animation-delay: 0.15s; }
+        .star:nth-child(3) { animation-delay: 0.3s; }
+        .star:nth-child(4) { animation-delay: 0.45s; }
+        .star:nth-child(5) { animation-delay: 0.6s; }
+
+        @keyframes starPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); filter: drop-shadow(0 0 4px #ffd700); }
+        }
+
+        .insta-tag {
+            font-size: 11px;
+            color: var(--gold-light);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .arrow-btn {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.12);
+            border: 1.2px solid rgba(212, 175, 55, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-light);
+            flex-shrink: 0;
+            transition: all 0.25s ease;
+        }
+
+        .arrow-btn svg {
+            width: 17px;
+            height: 17px;
+            fill: none !important;
+            stroke: currentColor !important;
+            stroke-width: 2.2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            display: block;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .action-card:hover .arrow-btn {
+                background: rgba(212, 175, 55, 0.3);
+                border-color: var(--gold-primary);
+                color: #ffffff;
+                transform: translateX(3px);
+            }
+        }
+
+        /* Quick Actions Grid */
+        .quick-actions {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .quick-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            padding: 11px 12px;
+            border-radius: 13px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(212, 175, 55, 0.28);
+            color: var(--gold-light);
+            text-decoration: none;
+            font-size: 12.5px;
+            font-weight: 600;
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+
+        .quick-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--gold-primary);
+            flex-shrink: 0;
+        }
+
+        .quick-btn:hover {
+            background: rgba(212, 175, 55, 0.16);
+            border-color: var(--gold-primary);
+            transform: translateY(-2px);
+        }
+
+        /* Footer & Contact Section */
+        .footer-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 16px;
+        }
+
+        .restaurant-meta {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.035);
+            border: 1px solid rgba(212, 175, 55, 0.22);
+            border-radius: 18px;
+            padding: 14px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .meta-item svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--gold-primary);
+            flex-shrink: 0;
+        }
+
+        .call-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 12px 18px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.24) 0%, rgba(212, 175, 55, 0.1) 100%);
+            border: 1.2px solid var(--gold-primary);
+            border-radius: 12px;
+            color: var(--gold-light);
+            text-decoration: none;
+            font-size: 13.5px;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+        }
+
+        .call-btn:hover {
+            background: var(--gold-primary);
+            color: #1a0205;
+            box-shadow: 0 6px 22px rgba(212, 175, 55, 0.4);
+        }
+
+        .call-btn:active {
+            transform: scale(0.98);
+        }
+
+        .copyright {
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .thanks-note {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 16.5px;
+            color: var(--gold-light);
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .city-note {
+            font-size: 11.5px;
+            color: var(--text-muted);
+            letter-spacing: 0.6px;
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(18, 2, 5, 0.95);
+            border: 1px solid var(--gold-primary);
+            color: #ffffff;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-size: 12.5px;
+            font-weight: 600;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Brand Header with Restaurant Logo -->
+        <header class="brand-section">
+            <div class="logo-wrapper">
+                <div class="logo-glow"></div>
+                <img src="logo_with_gold_rim.png" alt="Shree Kripa Logo" class="official-logo" id="uiLogo">
+            </div>
+
+            <h1 class="brand-title" id="uiTitle">Shree Kripa</h1>
+            <div class="brand-sub" id="uiSubtitle">Midway Restaurant</div>
+
+            <div class="tagline-badge" id="uiTagline">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                <span id="uiTaglineText">100% Pure Veg • Pigdamber, Rau • Indore</span>
+            </div>
+        </header>
+
+        <!-- Main Action Cards -->
+        <main class="links-wrapper">
+            <!-- 1. Google Rating & Review Card -->
+            <a href="https://share.google/MwO49jjEmQJTSvkte" target="_blank" rel="noopener noreferrer" class="action-card card-google" id="uiGoogleLink">
+                <div class="card-left">
+                    <div class="icon-box icon-google-box">
+                        <svg class="icon-svg" viewBox="0 0 48 48">
+                            <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                            <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                            <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                            <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                        </svg>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title" id="uiGoogleTitle">Rate Us on Google</div>
+                        <div class="card-desc" id="uiGoogleDesc">Share your 5-Star experience on Google</div>
+                        <div class="stars-row">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="arrow-btn" aria-label="Open Link">
+                    <svg width="17" height="17" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </div>
+            </a>
+
+            <!-- 2. Instagram Card -->
+            <a href="https://www.instagram.com/shree_kripa_restaurant?stkn=YjdsMzlvMTNlc3dz" target="_blank" rel="noopener noreferrer" class="action-card card-instagram" id="uiInstaLink">
+                <div class="card-left">
+                    <div class="icon-box icon-instagram-box">
+                        <svg class="icon-svg" viewBox="0 0 24 24" fill="#ffffff">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.449-1.44z"/>
+                        </svg>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title" id="uiInstaUser">Follow Us on Instagram</div>
+                        <div class="card-desc" id="uiInstaDesc">@shree_kripa_restaurant • Pure Veg, Ambience & Reels</div>
+                        <div class="insta-tag">
+                            <span>✨ Official Profile</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="arrow-btn" aria-label="Open Link">
+                    <svg width="17" height="17" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </div>
+            </a>
+        </main>
+
+        <!-- Quick Actions Row (Maps & Share) -->
+        <div class="quick-actions">
+            <a href="https://www.google.com/maps/search/?api=1&query=Shree+Kripa+Midway+Restaurant+Pigdamber+Rau+Indore" target="_blank" rel="noopener noreferrer" class="quick-btn" id="uiMapsBtn">
+                <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                <span>Get Directions</span>
+            </a>
+            <button type="button" class="quick-btn" id="uiShareBtn" onclick="handleShare()">
+                <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+                <span>Share Profile</span>
+            </button>
+        </div>
+
+        <!-- Restaurant Information & Direct Call -->
+        <footer class="footer-section">
+            <div class="restaurant-meta">
+                <div class="meta-item">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    <span id="uiAddress">Near Maharana Pratap Bridge, Pigdamber, Rau, NH 3, Indore</span>
+                </div>
+                
+                <a href="tel:9111030307" class="call-btn" id="uiPhoneBtn">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                    <span id="uiPhoneText">Call / Reservation: 91110 30307</span>
+                </a>
+            </div>
+
+            <p class="copyright" id="uiFooter">
+                <span class="thanks-note" id="uiFooterThanks">Thank You For Visiting Shree Kripa ✨</span>
+                <span class="city-note" id="uiFooterCity">100% Pure Veg • Pure Desi Ghee • Rau, Indore</span>
+            </p>
+        </footer>
+    </div>
+
+    <div class="toast" id="toastMsg">Link copied to clipboard!</div>
+
+    <!-- Central Configuration Script -->
+    <script src="config.js"></script>
+    <script>
+        function applyConfig(cfg) {
+            if (!cfg) return;
+            // Intelligent Auto-Redirect if mode is set to google_only or insta_only
+            if (cfg.qrMode === 'google_only' && cfg.googleReviewLink) {
+                window.location.replace(cfg.googleReviewLink);
+                return;
+            }
+            if (cfg.qrMode === 'insta_only' && cfg.instagramLink) {
+                window.location.replace(cfg.instagramLink);
+                return;
+            }
+
+            if (cfg.restaurantName) {
+                document.getElementById('pageTitle').innerText = `${cfg.restaurantName} Midway Restaurant | Rau, Indore`;
+                document.getElementById('uiTitle').innerText = cfg.restaurantName;
+            }
+            if (cfg.subtitle) {
+                document.getElementById('uiSubtitle').innerText = cfg.subtitle;
+            }
+            if (cfg.logoImage) {
+                document.getElementById('uiLogo').src = cfg.logoImage;
+            }
+            if (cfg.tagline) {
+                document.getElementById('uiTaglineText').innerText = cfg.tagline;
+            }
+            if (cfg.googleReviewLink) {
+                document.getElementById('uiGoogleLink').href = cfg.googleReviewLink;
+            }
+            if (cfg.googleRatingText) {
+                document.getElementById('uiGoogleTitle').innerText = cfg.googleRatingText;
+            }
+            if (cfg.googleRatingSubtext) {
+                document.getElementById('uiGoogleDesc').innerText = cfg.googleRatingSubtext;
+            }
+            if (cfg.instagramLink) {
+                document.getElementById('uiInstaLink').href = cfg.instagramLink;
+            }
+            if (cfg.instagramActionText) {
+                document.getElementById('uiInstaUser').innerText = cfg.instagramActionText;
+            }
+            if (cfg.instagramSubtext) {
+                document.getElementById('uiInstaDesc').innerText = cfg.instagramSubtext;
+            } else if (cfg.instagramUsername) {
+                document.getElementById('uiInstaDesc').innerText = `${cfg.instagramUsername} • Pure Veg, Ambience & Reels`;
+            }
+            if (cfg.address) {
+                document.getElementById('uiAddress').innerText = cfg.address;
+            }
+            if (cfg.mapsLink) {
+                document.getElementById('uiMapsBtn').href = cfg.mapsLink;
+            }
+            if (cfg.phoneNumber) {
+                document.getElementById('uiPhoneBtn').href = `tel:${cfg.phoneNumber}`;
+            }
+            if (cfg.phoneButtonText) {
+                document.getElementById('uiPhoneText').innerText = cfg.phoneButtonText;
+            }
+            if (cfg.footerThanks) {
+                document.getElementById('uiFooterThanks').innerText = cfg.footerThanks;
+            }
+            if (cfg.footerCity) {
+                document.getElementById('uiFooterCity').innerText = cfg.footerCity;
+            }
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toastMsg');
+            toast.innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2400);
+        }
+
+        function handleShare() {
+            if (navigator.share) {
+                navigator.share({
+                    title: document.title,
+                    text: 'Connect with Shree Kripa Midway Restaurant, Rau, Indore:',
+                    url: window.location.href
+                }).catch(() => {});
+            } else {
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    showToast('Profile link copied to clipboard!');
+                }).catch(() => {
+                    showToast('Link ready to share!');
+                });
+            }
+        }
+
+        // Apply immediately
+        if (typeof RESTAURANT_CONFIG !== 'undefined') {
+            applyConfig(RESTAURANT_CONFIG);
+        }
+
+        // Bypass mobile browser cache when hosted online
+        if (window.location.protocol.startsWith('http')) {
+            const url = 'config.js?t=' + Date.now();
+            fetch(url, { cache: 'no-store' })
+                .then(res => { if (res.ok) return res.text(); throw new Error('Not found'); })
+                .then(text => {
+                    const fn = new Function(text + '\nreturn (typeof RESTAURANT_CONFIG !== "undefined") ? RESTAURANT_CONFIG : null;');
+                    const cfg = fn();
+                    if (cfg) applyConfig(cfg);
+                })
+                .catch(() => {});
+        }
+    </script>
+</body>
+</html>
