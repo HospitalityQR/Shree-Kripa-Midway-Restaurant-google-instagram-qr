@@ -7,7 +7,7 @@
 window.RESTAURANT_CONFIG = {
     // 1. Restaurant Brand Identity (Hindi 'श्री कृपा' + Midway Restaurant)
     name: "श्री कृपा",
-    subname: "MIDWAY RESTAURANT",
+    subname: "MIDWAY RESTAURANT Nmaan",
     hindiTitleUrl: "shree_kripa_hindi_title.png?v=2",
     tagline: "100% Pure Veg • Rau, NH 3, Indore",
     highlight: "Pure Desi Ghee • Amul Butter • Pure Paneer",
