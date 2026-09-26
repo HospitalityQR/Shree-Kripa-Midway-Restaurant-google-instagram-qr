@@ -1,16 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="standeeTitle">Shree Kripa Midway Restaurant - Official Table Standee</title>
+    <title>श्री कृपा Midway Restaurant — Printable QR Standee Studio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        @page {
-            size: A4 portrait;
-            margin: 0;
+        :root {
+            --teal-top: #0b3d46;
+            --teal-mid: #072c33;
+            --teal-deep: #031316;
+            --gold-primary: #c5a034;
+            --gold-light: #f2d887;
+            --gold-dark: #9a7b24;
         }
 
         * {
@@ -21,258 +25,324 @@
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background: #ede4e6;
+            background: #041518;
+            color: #ffffff;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 24px;
+            padding: 28px 16px 60px;
         }
 
-        .print-btn-bar {
-            margin-bottom: 22px;
+        /* Studio Toolbar (Hidden when printing) */
+        .toolbar {
+            width: 100%;
+            max-width: 920px;
+            background: rgba(7, 44, 51, 0.92);
+            border: 1px solid rgba(212, 175, 55, 0.45);
+            border-radius: 16px;
+            padding: 16px 20px;
+            margin-bottom: 28px;
             display: flex;
-            gap: 12px;
             flex-wrap: wrap;
-            justify-content: center;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
         }
 
-        .btn {
-            background: #1c0206;
-            color: #eed88c;
-            border: 1.5px solid #c5a034;
-            padding: 11px 24px;
-            font-size: 14.5px;
-            font-weight: 700;
+        .toolbar-title {
+            font-family: 'Cinzel', serif;
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--gold-light);
+            letter-spacing: 1px;
+        }
+
+        .toolbar-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .mode-btn {
+            padding: 9px 14px;
             border-radius: 10px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            background: rgba(4, 24, 29, 0.8);
+            color: #e5e5e5;
+            font-size: 12.5px;
+            font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-            transition: all 0.25s ease;
+            transition: all 0.2s ease;
         }
 
-        .btn:hover {
-            background: #34060e;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.35);
+        .mode-btn.active,
+        .mode-btn:hover {
+            background: linear-gradient(135deg, #f2d887 0%, #c5a034 100%);
+            color: #031316;
+            border-color: #f2d887;
         }
 
-        .btn-secondary {
-            background: #ffffff;
-            color: #1a0205;
-            border-color: #c5a034;
+        .print-btn {
+            padding: 9px 18px;
+            border-radius: 10px;
+            border: 1.5px solid #f2d887;
+            background: #093b44;
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 800;
+            cursor: pointer;
         }
 
-        /* Standee Card */
+        /* 4x6 Inch (1200x1800 aspect ratio = 2:3) Standee Card */
         .standee-card {
-            width: 440px;
-            height: 700px;
-            background: linear-gradient(180deg, #3B0712 0%, #250a10 50%, #19090c 100%);
-            border: 2px solid #c5a034;
-            border-radius: 24px;
-            padding: 24px 20px;
+            width: 480px;
+            height: 720px;
+            background-color: var(--teal-deep);
+            background-image:
+                radial-gradient(circle at 50% 18%, rgba(242, 216, 135, 0.24) 0%, transparent 45%),
+                linear-gradient(180deg, rgba(10, 58, 66, 0.78) 0%, rgba(5, 32, 38, 0.85) 58%, rgba(3, 18, 22, 0.94) 100%),
+                url('ambience_1.jpg');
+            background-size: cover;
+            background-position: center center;
+            position: relative;
+            padding: 26px 28px 22px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
-            position: relative;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55);
-            color: #ffffff;
             text-align: center;
-            page-break-inside: avoid;
+            box-shadow: 0 25px 65px rgba(0, 0, 0, 0.75);
+            overflow: hidden;
         }
 
-        .inner-border {
+        /* Outer & Inner Gold Borders */
+        .border-outer {
             position: absolute;
-            top: 7px;
-            left: 7px;
-            right: 7px;
-            bottom: 7px;
-            border: 1px solid rgba(223, 196, 118, 0.45);
-            border-radius: 18px;
+            inset: 14px;
+            border: 2px solid var(--gold-primary);
             pointer-events: none;
+            z-index: 2;
         }
 
-        /* Brand Top */
-        .brand-header {
+        .border-inner {
+            position: absolute;
+            inset: 20px;
+            border: 1px solid var(--gold-dark);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Header Section */
+        .standee-header {
             width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 4px;
+            z-index: 3;
         }
 
-        .logo-box {
-            position: relative;
-            width: 110px;
-            height: 110px;
+        .standee-logo {
+            width: 82px;
+            height: 82px;
+            border-radius: 50%;
+            object-fit: contain;
+            margin-bottom: 2px;
+            filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
+        }
+
+        .standee-hindi-title {
+            width: 228px;
+            height: auto;
+            margin-top: -16px;
+            margin-bottom: 2px;
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
+        }
+
+        .standee-subname {
+            font-family: 'Cinzel', serif;
+            font-size: 14.5px;
+            font-weight: 800;
+            color: var(--gold-light);
+            letter-spacing: 3.2px;
+            margin-bottom: 3px;
+        }
+
+        .standee-location {
+            font-size: 9.5px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 1.4px;
             margin-bottom: 8px;
+        }
+
+        .standee-divider {
+            width: 78%;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .logo-box img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.65), 0 0 16px rgba(212, 175, 55, 0.4);
-        }
-
-        .brand-name {
-            font-size: 23px;
-            font-weight: 800;
-            letter-spacing: 0.6px;
-            color: #eed88c;
-            margin-bottom: 2px;
-        }
-
-        .brand-sub {
-            font-size: 11.5px;
-            font-weight: 700;
-            color: #ffffff;
-            letter-spacing: 1.2px;
-            text-transform: uppercase;
             margin-bottom: 6px;
         }
-
-        .veg-tag {
-            display: inline-block;
-            background: rgba(212, 175, 55, 0.15);
-            border: 1px solid #c5a034;
-            color: #eed88c;
-            padding: 4px 14px;
-            border-radius: 20px;
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 0.6px;
-            text-transform: uppercase;
+        .standee-divider::before,
+        .standee-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--gold-primary);
+        }
+        .standee-diamond {
+            width: 6px;
+            height: 6px;
+            background: var(--gold-light);
+            transform: rotate(45deg);
+            margin: 0 6px;
         }
 
-        /* Middle QR Block */
-        .qr-section {
+        /* Body Modes */
+        .standee-body {
+            width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
+            z-index: 3;
         }
 
         .scan-heading {
-            font-size: 19px;
+            font-size: 18.5px;
             font-weight: 800;
             color: #ffffff;
-            margin-bottom: 9px;
-            letter-spacing: 0.8px;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
         }
 
-        /* Platform Badges */
-        .platform-badges {
+        .pills-wrap {
             display: flex;
             gap: 10px;
             margin-bottom: 12px;
         }
 
-        .badge-pill {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid #c5a034;
-            border-radius: 20px;
-            padding: 4px 12px;
-            display: flex;
+        .standee-pill {
+            display: inline-flex;
             align-items: center;
             gap: 6px;
-            font-size: 11px;
-            font-weight: 700;
+            padding: 4px 13px;
+            border-radius: 20px;
+            background: #06262d;
+            border: 1px solid #d4af37;
             color: #ffffff;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+            font-size: 9.5px;
+            font-weight: 700;
         }
 
-        .badge-ico {
-            width: 17px;
-            height: 17px;
-            object-fit: contain;
-            border-radius: 3px;
+        .standee-pill svg {
+            width: 12px;
+            height: 12px;
         }
 
-        .qr-box {
+        .qr-card-single {
+            width: 280px;
+            height: 280px;
             background: #ffffff;
-            padding: 10px;
-            border-radius: 18px;
-            border: 2px solid #c5a034;
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55);
-            width: 255px;
-            height: 255px;
+            border: 2px solid var(--gold-primary);
+            border-radius: 14px;
+            padding: 14px;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .qr-box img {
+        .qr-card-single img {
             width: 100%;
             height: 100%;
-            display: block;
-            border-radius: 4px;
+            object-fit: contain;
         }
 
-        /* Footer */
-        .footer-block {
+        /* Dual QR Mode */
+        .dual-qr-grid {
+            display: none;
             width: 100%;
-            margin-bottom: 2px;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            padding: 0 6px;
+        }
+
+        .dual-qr-box {
+            background: #ffffff;
+            border: 2px solid var(--gold-primary);
+            border-radius: 12px;
+            padding: 10px 8px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
         }
 
-        .address-box {
-            border: 1.5px solid #c5a034;
-            border-radius: 14px;
-            padding: 9px 18px;
-            width: 92%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2px;
-            margin-bottom: 5px;
-        }
-
-        .location-title {
-            font-size: 13px;
-            font-weight: 700;
+        .dual-qr-header {
+            background: #062a31;
+            border: 1px solid var(--gold-primary);
             color: #ffffff;
-            letter-spacing: 0.3px;
-        }
-
-        .location-text {
-            font-size: 11px;
-            color: #ffffff;
-            line-height: 1.35;
-        }
-
-        .phone-text {
-            font-size: 14px;
-            color: #eed88c;
+            font-size: 9.5px;
             font-weight: 800;
-            letter-spacing: 0.4px;
-            margin-top: 2px;
+            padding: 4px 10px;
+            border-radius: 14px;
+            width: 92%;
         }
 
-        .footer-note {
-            font-family: 'Playfair Display', serif;
+        .dual-qr-box img {
+            width: 155px;
+            height: 155px;
+            object-fit: contain;
+        }
+
+        .dual-qr-foot {
+            font-size: 8px;
+            font-weight: 800;
+            color: #08343c;
+        }
+
+        /* Footer Section */
+        .standee-footer {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            z-index: 3;
+            padding: 0 8px;
+        }
+
+        .standee-info-box {
+            width: 94%;
+            background: rgba(4, 24, 29, 0.88);
+            border: 1px solid var(--gold-primary);
+            border-radius: 8px;
+            padding: 8px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .standee-addr {
+            font-size: 9px;
+            color: #eaf2f2;
+        }
+
+        .standee-phone {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--gold-light);
+        }
+
+        .standee-thanks {
+            font-family: 'Playfair Display', Georgia, serif;
             font-style: italic;
-            font-size: 14.5px;
-            color: #eed88c;
-            font-weight: 600;
-            letter-spacing: 0.3px;
-            margin-top: 4px;
-            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+            font-size: 11.5px;
+            color: var(--gold-light);
             display: flex;
             align-items: center;
             gap: 8px;
-        }
-
-        .sparkle-icon {
-            color: #c5a034;
-            font-size: 12px;
         }
 
         @media print {
@@ -280,12 +350,12 @@
                 background: none;
                 padding: 0;
             }
-            .print-btn-bar {
+            .toolbar {
                 display: none !important;
             }
             .standee-card {
                 box-shadow: none;
-                margin: auto;
+                margin: 0 auto;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
@@ -294,146 +364,117 @@
 </head>
 <body>
 
-    <div class="print-btn-bar">
-        <button class="btn" onclick="window.print()">🖨️ Print Standee (Ctrl + P)</button>
-        <button class="btn btn-secondary" onclick="toggleQRMode()">🔄 Toggle QR (Single / Dual)</button>
-        <button class="btn btn-secondary" onclick="window.location.href='index.html'">📱 View Mobile Page</button>
-    </div>
-
-    <!-- Printable Table Standee Card -->
-    <div class="standee-card" id="printableCard">
-        <div class="inner-border"></div>
-
-        <!-- Top: Logo & Title -->
-        <div class="brand-header">
-            <div class="logo-box">
-                <img src="logo_with_gold_rim.png" alt="Shree Kripa Logo" id="stLogo">
-            </div>
-            <div class="brand-name" id="stName">SHREE KRIPA</div>
-            <div class="brand-sub" id="stSub">MIDWAY RESTAURANT</div>
-            <div class="veg-tag" id="stTagline">100% PURE VEG • PIGDAMBER, RAU • INDORE</div>
-        </div>
-
-        <!-- Middle: QR Block -->
-        <div class="qr-section">
-            <div class="scan-heading" id="stScanHeading">SCAN TO CONNECT</div>
-            <div class="platform-badges" id="stBadges">
-                <div class="badge-pill">
-                    <img src="google_icon.png" class="badge-ico" alt="Google">
-                    <span>Rate Us on Google</span>
-                </div>
-                <div class="badge-pill">
-                    <img src="instagram_icon.png" class="badge-ico" alt="Instagram">
-                    <span>Follow Us on Instagram</span>
-                </div>
-            </div>
-            <div class="qr-box">
-                <img src="qr_code.png" alt="Scan QR Code" id="stQR">
-            </div>
-        </div>
-
-        <!-- Bottom: Location, Phone & Footer -->
-        <div class="footer-block">
-            <div class="address-box">
-                <div class="location-title">Shree Kripa Midway Restaurant,</div>
-                <div class="location-text" id="stAddress">Near Maharana Pratap Bridge, Pigdamber, Rau, Indore</div>
-                <div class="phone-text" id="stPhone">Call / Reservation: 91110 30307</div>
-            </div>
-            <div class="footer-note">
-                <span class="sparkle-icon">✦</span>
-                <span id="stFooterThanks">Thank You For Visiting Shree Kripa</span>
-                <span class="sparkle-icon">✦</span>
-            </div>
+    <div class="toolbar">
+        <div class="toolbar-title">श्री कृपा MIDWAY RESTAURANT • 300 DPI STANDEE STUDIO</div>
+        <div class="toolbar-controls">
+            <button class="mode-btn active" onclick="setStandeeMode('hub', this)">1. Smart Hub Standee</button>
+            <button class="mode-btn" onclick="setStandeeMode('dual', this)">2. Dual Direct QR</button>
+            <button class="mode-btn" onclick="setStandeeMode('google', this)">3. Google Review Direct</button>
+            <button class="mode-btn" onclick="setStandeeMode('insta', this)">4. Instagram Direct</button>
+            <button class="print-btn" onclick="window.print()">🖨️ Print / Save PDF</button>
         </div>
     </div>
 
-    <script src="config.js"></script>
+    <div class="standee-card">
+        <div class="border-outer"></div>
+        <div class="border-inner"></div>
+
+        <!-- Header -->
+        <div class="standee-header">
+            <img src="logo_with_gold_rim.png" alt="श्री कृपा Logo" class="standee-logo">
+            <img src="shree_kripa_hindi_title.png" alt="श्री कृपा" class="standee-hindi-title">
+            <div class="standee-subname">MIDWAY RESTAURANT</div>
+            <div class="standee-location">100% PURE VEG • RAU, NH 3, INDORE</div>
+            <div class="standee-divider"><div class="standee-diamond"></div></div>
+        </div>
+
+        <!-- Body -->
+        <div class="standee-body">
+            <div class="scan-heading" id="stHeading">SCAN TO CONNECT</div>
+
+            <div class="pills-wrap" id="stPills">
+                <div class="standee-pill">
+                    <svg viewBox="0 0 24 24">
+                        <path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.7l3.1-3.1C17.3 1.8 14.8 1 12 1 7.4 1 3.5 3.6 1.6 7.4l3.7 2.8C6.2 7.2 8.9 5 12 5z"/>
+                        <path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.6l3.7 2.9c2.2-2 3.7-5 3.7-8.7z"/>
+                        <path fill="#FBBC05" d="M5.3 14.8c-.2-.8-.4-1.6-.4-2.5s.2-1.7.4-2.5L1.6 7C.6 9 0 11.2 0 13.5s.6 4.5 1.6 6.5l3.7-2.9z"/>
+                        <path fill="#34A853" d="M12 24c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3.1 0-5.8-2.1-6.7-5l-3.7 2.8C3.5 20.9 7.4 24 12 24z"/>
+                    </svg>
+                    <span>Google Review</span>
+                </div>
+                <div class="standee-pill">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <circle cx="12" cy="12" r="4"></circle>
+                    </svg>
+                    <span>Instagram</span>
+                </div>
+            </div>
+
+            <!-- Single QR Container -->
+            <div class="qr-card-single" id="singleQrWrap">
+                <img src="qr_code.png" alt="QR Code" id="singleQrImg">
+            </div>
+
+            <!-- Dual QR Container -->
+            <div class="dual-qr-grid" id="dualQrWrap">
+                <div class="dual-qr-box">
+                    <div class="dual-qr-header">GOOGLE REVIEW</div>
+                    <img src="qr_google_direct.png" alt="Google Review QR">
+                    <div class="dual-qr-foot">★★★★★ RATE US ON GOOGLE</div>
+                </div>
+                <div class="dual-qr-box">
+                    <div class="dual-qr-header">INSTAGRAM</div>
+                    <img src="qr_instagram_direct.png" alt="Instagram QR">
+                    <div class="dual-qr-foot">@SHREE_KRIPA_RESTAURANT</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="standee-footer">
+            <div class="standee-info-box">
+                <div class="standee-addr">Near Maharana Pratap Bridge, Pigdamber, Rau, NH 3, Indore</div>
+                <div class="standee-phone">Call / Reservation: 91110 30307</div>
+            </div>
+            <div class="standee-thanks">
+                <span>✦</span>
+                <span>Thank you for dining with us!</span>
+                <span>✦</span>
+            </div>
+        </div>
+    </div>
+
     <script>
-        let currentMode = 'landing'; // 'landing', 'google', 'insta'
+        function setStandeeMode(mode, btn) {
+            document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
 
-        function applyStandeeConfig(cfg) {
-            if (!cfg) return;
-            if (cfg.restaurantName) {
-                document.getElementById('stName').innerText = cfg.restaurantName.toUpperCase();
-                document.getElementById('standeeTitle').innerText = `${cfg.restaurantName} Midway Restaurant - Official Table Standee`;
-            }
-            if (cfg.subtitle) {
-                document.getElementById('stSub').innerText = cfg.subtitle.toUpperCase();
-            }
-            if (cfg.tagline) {
-                document.getElementById('stTagline').innerText = cfg.tagline;
-            }
-            if (cfg.logoImage) {
-                document.getElementById('stLogo').src = cfg.logoImage;
-            }
-            if (cfg.standeeHeading) {
-                document.getElementById('stScanHeading').innerText = cfg.standeeHeading;
-            }
-            if (cfg.shortAddress || cfg.address) {
-                document.getElementById('stAddress').innerText = cfg.shortAddress || cfg.address;
-            }
-            if (cfg.phoneButtonText) {
-                document.getElementById('stPhone').innerText = cfg.phoneButtonText;
-            }
-        }
+            const heading = document.getElementById('stHeading');
+            const singleWrap = document.getElementById('singleQrWrap');
+            const singleImg = document.getElementById('singleQrImg');
+            const dualWrap = document.getElementById('dualQrWrap');
 
-        function toggleQRMode() {
-            const qrImg = document.getElementById('stQR');
-            const heading = document.getElementById('stScanHeading');
-            const badges = document.getElementById('stBadges');
-
-            if (currentMode === 'landing') {
-                currentMode = 'google';
-                qrImg.src = 'qr_google_direct.png';
-                heading.innerText = 'RATE US ON GOOGLE';
-                badges.innerHTML = `
-                    <div class="badge-pill">
-                        <img src="google_icon.png" class="badge-ico" alt="Google">
-                        <span>⭐ Google 5-Star Reviews</span>
-                    </div>
-                `;
-            } else if (currentMode === 'google') {
-                currentMode = 'insta';
-                qrImg.src = 'qr_instagram_direct.png';
-                heading.innerText = 'FOLLOW US ON INSTAGRAM';
-                badges.innerHTML = `
-                    <div class="badge-pill">
-                        <img src="instagram_icon.png" class="badge-ico" alt="Instagram">
-                        <span>📸 Follow @shree_kripa_restaurant</span>
-                    </div>
-                `;
-            } else {
-                currentMode = 'landing';
-                qrImg.src = 'qr_code.png';
-                heading.innerText = 'SCAN TO CONNECT';
-                badges.innerHTML = `
-                    <div class="badge-pill">
-                        <img src="google_icon.png" class="badge-ico" alt="Google">
-                        <span>Rate Us on Google</span>
-                    </div>
-                    <div class="badge-pill">
-                        <img src="instagram_icon.png" class="badge-ico" alt="Instagram">
-                        <span>Follow Us on Instagram</span>
-                    </div>
-                `;
+            if (mode === 'hub') {
+                heading.textContent = 'SCAN TO CONNECT';
+                singleWrap.style.display = 'flex';
+                dualWrap.style.display = 'none';
+                singleImg.src = 'qr_code.png';
+            } else if (mode === 'dual') {
+                heading.textContent = 'SCAN TO CONNECT DIRECTLY';
+                singleWrap.style.display = 'none';
+                dualWrap.style.display = 'grid';
+            } else if (mode === 'google') {
+                heading.textContent = 'RATE US ON GOOGLE';
+                singleWrap.style.display = 'flex';
+                dualWrap.style.display = 'none';
+                singleImg.src = 'qr_google_direct.png';
+            } else if (mode === 'insta') {
+                heading.textContent = 'FOLLOW US ON INSTAGRAM';
+                singleWrap.style.display = 'flex';
+                dualWrap.style.display = 'none';
+                singleImg.src = 'qr_instagram_direct.png';
             }
-        }
-
-        if (typeof RESTAURANT_CONFIG !== 'undefined') {
-            applyStandeeConfig(RESTAURANT_CONFIG);
-        }
-
-        // Bypass mobile browser cache when hosted online
-        if (window.location.protocol.startsWith('http')) {
-            const url = 'config.js?t=' + Date.now();
-            fetch(url, { cache: 'no-store' })
-                .then(res => { if (res.ok) return res.text(); throw new Error('Not found'); })
-                .then(text => {
-                    const fn = new Function(text + '\nreturn (typeof RESTAURANT_CONFIG !== "undefined") ? RESTAURANT_CONFIG : null;');
-                    const cfg = fn();
-                    if (cfg) applyStandeeConfig(cfg);
-                })
-                .catch(() => {});
         }
     </script>
 </body>
