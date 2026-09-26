@@ -551,7 +551,7 @@ def build_mobile_landing_preview(bg_img, output_filename="mobile_landing_preview
     Generate a visual preview of the Mobile QR Landing Page (index.html) showing:
     - Exact same Peacock Teal & Warm Golden Cove Ambience background
     - Circular 24k Gold Rim SK Logo + Official Hindi 'श्री कृपा' Calligraphy with Bansuri & Mor Pankh
-    - 'Rate Us on Google' and 'Follow Us on Instagram' pills & interactive cards
+    - 'Rate Us on Google' and 'Follow Us on Instagram' interactive cards (no duplicate top pills)
     - Ambience gallery strip + Address & Call button
     """
     w, h = 1200, 1800
@@ -560,81 +560,53 @@ def build_mobile_landing_preview(bg_img, output_filename="mobile_landing_preview
     draw_indri_luxury_borders(draw, w, h)
     draw_brand_header(canvas, draw, w)
 
-    font_cta = get_font(38, bold=True)
-    font_pill = get_font(21, bold=True)
-    font_card_title = get_font(30, bold=True)
-    font_card_desc = get_font(22, bold=False)
-    font_card_tag = get_font(21, bold=True)
-    font_sec = get_font(22, bold=True)
+    font_card_title = get_font(32, bold=True)
+    font_card_desc = get_font(23, bold=False)
+    font_card_tag = get_font(22, bold=True)
+    font_sec = get_font(23, bold=True)
 
-    cta_text = "SCAN TO CONNECT  •  MOBILE LANDING PAGE"
-    bbox = draw.textbbox((0, 0), cta_text, font=font_cta)
-    draw.text(((w - (bbox[2] - bbox[0])) / 2, 566), cta_text, fill=(255, 255, 255), font=font_cta)
-
-    # Pills: Rate Us on Google & Follow Us on Instagram
-    label_g = "Rate Us on Google"
-    label_i = "Follow Us on Instagram"
-    bbox_g = draw.textbbox((0, 0), label_g, font=font_pill)
-    bbox_i = draw.textbbox((0, 0), label_i, font=font_pill)
-    pill_y = 628
-    pill_h = 50
-    pill_w_g = (bbox_g[2] - bbox_g[0]) + 80
-    pill_w_i = (bbox_i[2] - bbox_i[0]) + 80
-    gap = 22
-    start_x = int((w - (pill_w_g + gap + pill_w_i)) / 2)
-
-    gx1, gy1 = start_x, pill_y
-    draw.rounded_rectangle([gx1, gy1, gx1 + pill_w_g, gy1 + pill_h], radius=25, fill=(6, 38, 45), outline=(212, 175, 55), width=2)
-    draw_google_g_icon(draw, gx1 + 32, gy1 + pill_h // 2, radius=12)
-    draw.text((gx1 + 56, gy1 + 13), label_g, fill=(255, 255, 255), font=font_pill)
-
-    ix1 = gx1 + pill_w_g + gap
-    draw.rounded_rectangle([ix1, gy1, ix1 + pill_w_i, gy1 + pill_h], radius=25, fill=(6, 38, 45), outline=(212, 175, 55), width=2)
-    draw_instagram_icon(draw, ix1 + 32, gy1 + pill_h // 2, size=22)
-    draw.text((ix1 + 56, gy1 + 13), label_i, fill=(255, 255, 255), font=font_pill)
-
-    # Action Card 1: Rate Us on Google
+    # Action Card 1 & 2 (Directly below the gold divider, no duplicate top pills)
     glass = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     gdraw = ImageDraw.Draw(glass)
-    c1_y1, c1_y2 = 708, 888
-    c2_y1, c2_y2 = 914, 1094
-    gdraw.rounded_rectangle([115, c1_y1, w - 115, c1_y2], radius=24, fill=(8, 46, 54, 230), outline=(242, 216, 135, 255), width=3)
-    gdraw.rounded_rectangle([115, c2_y1, w - 115, c2_y2], radius=24, fill=(5, 30, 36, 225), outline=(197, 160, 52, 230), width=2)
+    c1_y1, c1_y2 = 590, 795
+    c2_y1, c2_y2 = 825, 1030
+    gdraw.rounded_rectangle([115, c1_y1, w - 115, c1_y2], radius=24, fill=(8, 46, 54, 232), outline=(242, 216, 135, 255), width=3)
+    gdraw.rounded_rectangle([115, c2_y1, w - 115, c2_y2], radius=24, fill=(5, 30, 36, 228), outline=(197, 160, 52, 230), width=2)
     canvas.paste(Image.alpha_composite(canvas.convert("RGBA"), glass).convert("RGB"))
     draw = ImageDraw.Draw(canvas)
 
     # Google Card Content
-    draw.rounded_rectangle([150, c1_y1 + 35, 260, c1_y1 + 145], radius=24, fill=(255, 255, 255), outline=(212, 175, 55), width=2)
-    draw_google_g_icon(draw, 205, c1_y1 + 90, radius=32)
-    draw.text((295, c1_y1 + 32), "Rate Us on Google", fill=(255, 255, 255), font=font_card_title)
-    draw.text((295, c1_y1 + 76), "Share your dining experience with us", fill=(185, 210, 212), font=font_card_desc)
-    draw_5_stars_row(draw, 305, c1_y1 + 128, star_radius=10, spacing=26, color=(251, 191, 36))
-    draw.text((440, c1_y1 + 116), "Tap to Review", fill=(242, 216, 135), font=font_card_tag)
-    draw.ellipse([w - 215, c1_y1 + 58, w - 151, c1_y1 + 122], fill=(212, 175, 55), outline=(242, 216, 135), width=2)
-    draw.line([w - 196, c1_y1 + 90, w - 170, c1_y1 + 90], fill=(4, 24, 29), width=3)
+    draw.rounded_rectangle([150, c1_y1 + 42, 265, c1_y1 + 157], radius=24, fill=(255, 255, 255), outline=(212, 175, 55), width=2)
+    draw_google_g_icon(draw, 207, c1_y1 + 100, radius=34)
+    draw.text((300, c1_y1 + 38), "Rate Us on Google", fill=(255, 255, 255), font=font_card_title)
+    draw.text((300, c1_y1 + 86), "Share your dining experience with us", fill=(185, 210, 212), font=font_card_desc)
+    draw_5_stars_row(draw, 310, c1_y1 + 142, star_radius=10, spacing=26, color=(251, 191, 36))
+    draw.text((445, c1_y1 + 130), "Tap to Review", fill=(242, 216, 135), font=font_card_tag)
+    draw.ellipse([w - 215, c1_y1 + 70, w - 151, c1_y1 + 134], fill=(212, 175, 55), outline=(242, 216, 135), width=2)
+    draw.line([w - 196, c1_y1 + 102, w - 170, c1_y1 + 102], fill=(4, 24, 29), width=3)
 
     # Instagram Card Content
-    draw.rounded_rectangle([150, c2_y1 + 35, 260, c2_y1 + 145], radius=24, fill=(214, 41, 118), outline=(242, 216, 135), width=2)
-    draw_instagram_icon(draw, 205, c2_y1 + 90, size=62)
-    draw.text((295, c2_y1 + 32), "Follow Us on Instagram", fill=(255, 255, 255), font=font_card_title)
-    draw.text((295, c2_y1 + 76), "Explore delicacies, reels & royal vibes", fill=(185, 210, 212), font=font_card_desc)
-    draw.text((295, c2_y1 + 116), "@shree_kripa_restaurant", fill=(242, 216, 135), font=font_card_tag)
-    draw.ellipse([w - 215, c2_y1 + 58, w - 151, c2_y1 + 122], fill=(8, 48, 56), outline=(212, 175, 55), width=2)
-    draw.line([w - 196, c2_y1 + 90, w - 170, c2_y1 + 90], fill=(242, 216, 135), width=3)
+    draw.rounded_rectangle([150, c2_y1 + 42, 265, c2_y1 + 157], radius=24, fill=(214, 41, 118), outline=(242, 216, 135), width=2)
+    draw_instagram_icon(draw, 207, c2_y1 + 100, size=64)
+    draw.text((300, c2_y1 + 38), "Follow Us on Instagram", fill=(255, 255, 255), font=font_card_title)
+    draw.text((300, c2_y1 + 86), "Explore delicacies, reels & royal vibes", fill=(185, 210, 212), font=font_card_desc)
+    draw.text((300, c2_y1 + 130), "@shree_kripa_restaurant", fill=(242, 216, 135), font=font_card_tag)
+    draw.ellipse([w - 215, c2_y1 + 70, w - 151, c2_y1 + 134], fill=(8, 48, 56), outline=(212, 175, 55), width=2)
+    draw.line([w - 196, c2_y1 + 102, w - 170, c2_y1 + 102], fill=(242, 216, 135), width=3)
 
     # Ambience Showcase Strip
     sec_label = "OUR ROYAL DINING AMBIENCE"
     bbox = draw.textbbox((0, 0), sec_label, font=font_sec)
     sw = bbox[2] - bbox[0]
     sx = (w - sw) / 2
-    draw.text((sx, 1132), sec_label, fill=(242, 216, 135), font=font_sec)
-    draw_sparkle(draw, sx - 24, 1144, radius=9, color=(242, 216, 135))
-    draw_sparkle(draw, sx + sw + 24, 1144, radius=9, color=(242, 216, 135))
+    draw.text((sx, 1085), sec_label, fill=(242, 216, 135), font=font_sec)
+    draw_sparkle(draw, sx - 24, 1098, radius=9, color=(242, 216, 135))
+    draw_sparkle(draw, sx + sw + 24, 1098, radius=9, color=(242, 216, 135))
 
-    thumb_w, thumb_h = 302, 295
+    thumb_w, thumb_h = 302, 335
     thumb_gap = 32
     t_start_x = int((w - (thumb_w * 3 + thumb_gap * 2)) / 2)
-    t_y = 1178
+    t_y = 1138
     for idx, fn in enumerate(["ambience_1.jpg", "ambience_2.jpg", "ambience_3.jpg"]):
         tx = t_start_x + idx * (thumb_w + thumb_gap)
         if os.path.exists(fn):
